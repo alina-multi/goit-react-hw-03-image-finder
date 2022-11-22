@@ -1,15 +1,10 @@
 import styled from "@emotion/styled";
 
-export const App = styled.section`
+export const Section = styled.section`
 display: grid;
-gridTemplateColumns: 1fr;
-gridGap: 16px;
-paddingBottom: 24px;
+grid-template-columns: 1fr;
+grid-gap: 16px;
+padding-bottom: 24px;
 `
-/*
- * Стили компонента App
- */
-// .App {
-//    
-//   }
+
   

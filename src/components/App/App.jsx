@@ -1,8 +1,11 @@
 import {Component} from "react";
-import {Searchbar} from "../Searchbar";
-import { nanoid } from "nanoid";
-import { fetchImages } from "api/api";
-import { Oval } from "react-loader-spinner";   
+import {Searchbar} from "../Searchbar/Searchbar";
+import { fetchImages } from "api/api";  
+import { Section } from "./App.styled";
+import { Loader } from "components/Loader/Loader";
+import { LoadMore } from "components/Button/Button";
+import { ImageGallery } from "components/ImageGallery/ImageGallery";
+
 
 
 
@@ -57,6 +60,7 @@ this.getImages()
 }
 
 onLoadMoreClick = () =>{
+  console.log("hi")
   this.increasePage();
 
 }
@@ -66,28 +70,19 @@ this.setState(state => ({page: state.page + 1}))
 }
 
   render(){
-   return <div>
+   return <Section>
     <Searchbar onSearch={this.onSearch}/>
    
-  
-   
    {this.state.isLoading ?
-    <Oval
-  height={80}
-  width={80}
-  color="#4fa94d"
-  wrapperStyle={{}}
-  wrapperClass=""
-  visible={true}
-  ariaLabel='oval-loading'
-  secondaryColor="#4fa94d"
-  strokeWidth={2}
-   strokeWidthSecondary={2}/> 
+    <Loader/> 
     : 
-    <ul>{this.state.currentImages.map(image => <li key={nanoid()}> <img src={image.webformatURL} alt={image.tags} /></li> )}</ul>}
-  {(this.state.currentImages.length > 11 && !this.state.isLoading) &&  <button type="button" onClick={this.onLoadMoreClick}>Load More</button>}
+    <ImageGallery images={this.currentImages}/>}
 
-   </div>
+  {(this.state.currentImages.length > 11 && !this.state.isLoading) 
+  &&
+    <LoadMore onLoadMoreClick={this.onLoadMoreClick}/>}
+
+   </Section>
 
 
    
