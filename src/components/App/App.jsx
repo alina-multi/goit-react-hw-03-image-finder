@@ -7,9 +7,6 @@ import { LoadMore } from "components/Button/Button";
 import { ImageGallery } from "components/ImageGallery/ImageGallery";
 import {ImageGalleryItem } from "../ImageGalleryItem/ImageGalleryItem"
 
-
-
-
 export class App extends Component {
 state = {
   searchValue: "",
@@ -33,36 +30,28 @@ onSearch = (e) => {
 }
 
 async getImages (){
-  
   try {
     this.setState({isLoading: true})
     const currentImages = await fetchImages(this.state.searchValue, this.state.page);
     this.setState({currentImages})
  
    } catch {}
-
    this.setState({isLoading: false})
 }
 
 componentDidMount(){
   this.getImages()
- 
 }
 
  componentDidUpdate(_,prevState) {
   console.log("update")
 if(prevState.searchValue !== this.state.searchValue || prevState.page !== this.state.page ){
 this.getImages()
-  
   }
-
-
-
 }
 
 onLoadMoreClick = () =>{
   this.increasePage();
-
 }
 
 increasePage=()=>{
@@ -78,7 +67,7 @@ this.setState(state => ({page: state.page + 1}))
     : 
     <ImageGallery> 
     <ImageGalleryItem images={this.state.currentImages}/> 
-    <ImageGallery/>
+    </ImageGallery>
     }
 
     {(this.state.currentImages.length > 11 && !this.state.isLoading) 
@@ -86,8 +75,6 @@ this.setState(state => ({page: state.page + 1}))
     <LoadMore onLoadMoreClick={this.onLoadMoreClick}/>}
 
    </Section>
-
-
   }
 }
 
