@@ -5,6 +5,7 @@ import { Section } from "./App.styled";
 import { Loader } from "components/Loader/Loader";
 import { LoadMore } from "components/Button/Button";
 import { ImageGallery } from "components/ImageGallery/ImageGallery";
+import {ImageGalleryItem } from "../ImageGalleryItem/ImageGalleryItem"
 
 
 
@@ -60,7 +61,6 @@ this.getImages()
 }
 
 onLoadMoreClick = () =>{
-  console.log("hi")
   this.increasePage();
 
 }
@@ -73,19 +73,20 @@ this.setState(state => ({page: state.page + 1}))
    return <Section>
     <Searchbar onSearch={this.onSearch}/>
    
-   {this.state.isLoading ?
+    {this.state.isLoading ?
     <Loader/> 
     : 
-    <ImageGallery images={this.currentImages}/>}
+    <ImageGallery> 
+    <ImageGalleryItem images={this.state.currentImages}/> 
+    <ImageGallery/>
+    }
 
-  {(this.state.currentImages.length > 11 && !this.state.isLoading) 
-  &&
+    {(this.state.currentImages.length > 11 && !this.state.isLoading) 
+    &&
     <LoadMore onLoadMoreClick={this.onLoadMoreClick}/>}
 
    </Section>
 
-
-   
 
   }
 }
