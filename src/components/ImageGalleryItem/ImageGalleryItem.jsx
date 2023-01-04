@@ -4,21 +4,14 @@ import { nanoid } from "nanoid";
 
 
 
-// export const ImageGalleryItem =({images})=>{
-//     return images.map
-//         (image => 
-//         <Item key={nanoid()}> <Image src={image.webformatURL} alt={image.tags} /> </Item>)} 
-
-
-   
-       
 
         
-export class ImageGalleryItem extends Component { 
+export class ImageGalleryItem1 extends Component { 
 
     render(){
         const images = this.props.images;
         return images.map
         (image => 
-        <Item key={nanoid()}> <Image src={image.webformatURL} alt={image.tags} /> </Item>)} 
+        <Item key={nanoid()}> <Image id={image.id} src={image.webformatURL} alt={image.tags} onClick={this.props.onImageClick} /> </Item>)} 
 }
+
